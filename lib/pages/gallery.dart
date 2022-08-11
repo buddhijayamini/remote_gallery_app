@@ -29,8 +29,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
             // ignore: deprecated_member_use
             RaisedButton(
               padding: const EdgeInsets.only(right: 5, left: 5),
-             color: Colors.indigo[900],
-             shape: const CircleBorder(),
+              color: Colors.indigo[900],
+              shape: const CircleBorder(),
               onPressed: () {},
               child: IconButton(
                 icon: const Icon(Icons.add_a_photo),

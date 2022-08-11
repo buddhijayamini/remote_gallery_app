@@ -14,7 +14,6 @@ class AddGallery extends StatefulWidget {
 }
 
 class _AddGalleryState extends State<AddGallery> {
-
   File? _image;
 
   final _picker = ImagePicker();
@@ -32,20 +31,20 @@ class _AddGalleryState extends State<AddGallery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.teal,
-        centerTitle: true,
-        elevation: 10,
-        toolbarHeight: 80,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        bottomOpacity: 10,
-        title: const Text(
-          "Add Gallery",
-          style: TextStyle(color: Colors.white, fontSize: 25),
+        appBar: AppBar(
+          backgroundColor: Colors.teal,
+          centerTitle: true,
+          elevation: 10,
+          toolbarHeight: 80,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          bottomOpacity: 10,
+          title: const Text(
+            "Add Gallery",
+            style: TextStyle(color: Colors.white, fontSize: 25),
+          ),
         ),
-      ),
-      body: SafeArea(
+        body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(35),
             child: Column(children: [
@@ -68,6 +67,5 @@ class _AddGalleryState extends State<AddGallery> {
             ]),
           ),
         ));
-    
   }
 }
