@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:remote_photo_app/pages/gallery.dart';
 
 class AddGallery extends StatefulWidget {
   const AddGallery({Key? key}) : super(key: key);
@@ -15,6 +16,53 @@ class AddGallery extends StatefulWidget {
 
 class _AddGalleryState extends State<AddGallery> {
   File? _image;
+
+  Future senData() async {
+    const baseURL = "localhost:8000/api/v1";
+    Map<String, String> headers = {
+      "Accept": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+      'Charset': 'utf-8',
+    };
+
+    final response = await http.post(
+      Uri.parse("$baseURL/gallery"),
+      headers: headers,
+      body: {"url": _image},
+    );
+
+    if (response.statusCode == 200) {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (BuildContext context) => GalleryScreen(),
+        ),
+        (Route route) => false,
+      );
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: Colors.white.withOpacity(0.8),
+              title: const Text("Error....",
+                  style: TextStyle(color: Colors.deepPurple, fontSize: 25)),
+              content: const Text(" Failed",
+                  style: TextStyle(color: Colors.red, fontSize: 23)),
+              actions: <Widget>[
+                // ignore: deprecated_member_use
+                FlatButton(
+                  color: Colors.redAccent,
+                  child: const Text("Close",
+                      style: TextStyle(color: Colors.white, fontSize: 20)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    }
+  }
 
   final _picker = ImagePicker();
   // Implementing the image picker
